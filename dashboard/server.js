@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-app.use(express.static("public"));
+app.use(express.static("../public"));
 
 const consumer = kafka.consumer({ groupId: "dashboard-group" });
 

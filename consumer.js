@@ -12,9 +12,17 @@ async function init() {
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      console.log(
-        `[${topic}] || [${group}] =====> 📩 Received message: ${message.value.toString()} (from Partition ${partition})`
-      );
+      const value = JSON.parse(message.value.toString());
+
+      console.log(`
+  📬 Topic: ${topic}
+  📦 Group: ${group}
+  🧩 Partition: ${partition}
+  🔑 Key: ${message.key?.toString()}
+  📅 Timestamp: ${value.timestamp}
+  🚴 Rider: ${value.name} from ${value.location}
+  ==============================
+      `);
     },
   });
 }
